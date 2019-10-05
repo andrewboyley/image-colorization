@@ -5,12 +5,13 @@ import argparse
 from functools import partial
 import pickle
 
+from comet_ml import Experiment
+
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from torchvision import datasets, transforms
 import torchvision.models as models
-
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,6 +20,8 @@ from skimage import io
 
 from utils import save_checkpoint, AverageMeter, visualize_image, GrayscaleImageFolder
 from model import ColorNet
+
+#Add experiment variable for comet.ml here
 
 # Parse arguments and prepare program
 parser = argparse.ArgumentParser(description='Training and Using ColorNet')

@@ -1,6 +1,6 @@
 .ipynb_checkpoints/
 .vscode/
-
+Datasets/
 
 
 # Byte-compiled / optimized / DLL files
@@ -139,6 +139,9 @@ venv.bak/
 
 ## Generated if empty string is given at "Please type another file name for output:"
 *.pdf
+*/outputs/color/*
+*/outputs/gray/*
+*/checkpoints/*
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
