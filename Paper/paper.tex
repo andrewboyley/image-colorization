@@ -91,7 +91,7 @@ For the sake of simplicity, we continue to use regression as it leads to satisfa
 
 \subsection{Model topology}
 
-Our choice of model has been based on the simple regression model developed by Luke Melas and loosely based on the network used by Zhang et al. \cite{zhang2016colorful} with the major difference being that their model used in 'Colorful Image Colorization' approached colorization as a classification problem.
+Our choice of model has been based on the simple regression model developed by Luke Melas and loosely based on the network used by Zhang et al. \cite{zhang2016colorful} with the major difference being that their model used in 'Colorful Image Colorization'\cite{zhang2016colorful} approached colorization as a classification problem.
 
 Our network topology consists of the first six layers of a ResNet-18, followed by three layers of deconvolutions. We find that this simple structure works well enough for our purposes and is relatively fast. Our model uses the Adam optimiser alongside PyTorch's autograd which makes backpropogating in our network trivial.
 
