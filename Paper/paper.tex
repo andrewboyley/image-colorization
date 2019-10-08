@@ -97,20 +97,46 @@ Our network topology consists of the first six layers of a ResNet-18, followed b
 
 \section{Proposed Method}
 
-Train colouriser on dataset X. Evaluate accuracy
+%Train colouriser on dataset X. Evaluate accuracy
+%
+%Explain how our dataset is built precisely: using flickr data, keywords, any preprocessing etc. 
+%
+%Show some images. 
+%
+%Maybe even compute mean statistics of dataset X and Y to show that they are in fact different?
+%
+%Explain method - compute accuracy on X -> X.
+%Then check X -> Y
+%
+%Then check how much of Y must be added to X to improve things?
+%
+%Would be nice to have multiple datasets, models, but maybe no time :(
 
-Explain how our dataset is built precisely: using flickr data, keywords, any preprocessing etc. 
+\subsection{Brief Outline}
 
-Show some images. 
+In order to determine the percentage of local data in the training dataset required to mitigate the effect of bias in machine learning models, multiple versions of the dataset are required, with each one consisting of a total of 40000 images and being constructed with a different percentage of South African images from 0\% to 50\% inclusive, increasing in graduations of 10\%. In addition to this training dataset, a validation dataset (of 1000 images in total) is also prepared with the same corresponding percentage inclusion of South African images.
 
-Maybe even compute mean statistics of dataset X and Y to show that they are in fact different?
+Each version of the dataset will be used to train the model independently of each other for a total of 75 epochs each, with validation being done at the conclusion of each epoch. 
 
-Explain method - compute accuracy on X -> X.
-Then check X -> Y
+A set collection of South African and International images will be passed through each model respectively, with the subsequent losses being an indication of the bias present in the model due to the predominant locale present in the training images (we take the dataset version with 0\% South African images included as the base case of how the model performs on South African image evaluation when trained exclusively on International images).
 
-Then check how much of Y must be added to X to improve things?
+\subsection{Building Datasets}
 
-Would be nice to have multiple datasets, models, but maybe no time :(
+\textbf{Where get european images from?????}
+
+\textbf{and must we show that the datasets are fundamentally different - maybe something that can be said about the source??}
+
+The collection of South African images\footnote{All images are freely available with a Creative Commons Licence or are in the public domain} was downloaded from the image-sharing service, Flickr. Only images which have been tagged with one of the following keywords were selected:
+
+\begin{itemize}
+	\item South Africa
+	\item Soweto
+	\item \textbf{etc. etc.}
+\end{itemize}
+
+A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 50\% South African image inclusion) by selecting the first \emph{n} and \emph{m} images from the image collections, respectively.
+
+\textbf{Include sample images here}
 
 \section{Experiments}
 
