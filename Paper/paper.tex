@@ -5,7 +5,9 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
+\graphicspath{{./images/}}
 \usepackage{textcomp}
+\usepackage{subfig}
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -68,7 +70,7 @@ Consequently, the refined aim is to investigate the optimal ratio of non-South A
 %Describe neural network, backprop, Insert image if space
 \subsection{Colour space}
 
-To make our lives easier, instead of using the typical RGB color space, we use the CIELAB color space. This makes it convenient when seperating the gray and color channels due to the fact that the 'L' channel in LAB is simply the grayscale image. We can then pass this grayscale input (1xWxH) through our model and compare the output (2xWxH) to the original 'AB' channels of the image. These 'AB' channels make up the color and simply show the red-green and blue-yellow shift respectively. HSB would be another option when choosing a suitable colour space. In general, the choice of colour space makes no difference to the resulting image that our network produces.
+To make our lives easier, instead of using the typical RGB color space, we use the CIELAB color space. This makes it convenient when seperating the gray and color channels due to the fact that the 'L' channel in LAB is simply the grayscale image. We can then pass this grayscale input (1 x W x H) through our model and compare the output (2 x W x H) to the original 'AB' channels of the image. These 'AB' channels make up the color and simply show the red-green and blue-yellow shift respectively. HSB would be another option when choosing a suitable colour space. In general, the choice of colour space makes no difference to the resulting image that our network produces.
 
 When reading images from our dataset, we first interpret them in the RBG colour space and then proceed to convert them to LAB using tools such as SciKit Learn or OpenCV, both of which contain colour space conversion libraries. 
 
@@ -76,11 +78,20 @@ When reading images from our dataset, we first interpret them in the RBG colour 
 
 When colorizing images using a deep learning approach, it is generally easiest to develop our model as a regression problem. Classification would yield better results which are more life-like and saturated whereas regression would lead to output images appearing dull and bland. This is the result of the multi-modality of pictures. There is no clear color for any one image. This leads our model, using an aggregate loss function, to simply find an average color, resulting in a bland image.
 
+\begin{figure}[h!]
+    \centering
+    \subfloat[Regression]{{\includegraphics[width=3.5cm]{cham-reg} }}%
+    \qquad
+    \subfloat[Classification]{{\includegraphics[width=3.5cm]{cham-class} }}%
+    \caption{Colour generated using regression vs classification \cite{zhang2016colorful}}%
+    \label{fig:reg_vs_class}
+\end{figure}
+
 For the sake of simplicity, we continue to use regression as it leads to satisfactory results whilst being simple to understand. We utilize a mean squared error loss which may average color distribution but still produces images with a reasonable amount of color. If we aimed to produce images which were more diverse in colour and saturated, regression would not suffice. Our model should, however, be able to compare output across datasets in order to draw correlation between the accuracy of the ouput and the representivity of local images in the data, which it does.
 
 \subsection{Model topology}
 
-Our choice of model has been based on the simple regression model developed by Luke Melas and loosely based on the network used by Zhang et al. with the major difference being that their model used in 'Colorful Image Colorization' approached colorization as a classification problem.
+Our choice of model has been based on the simple regression model developed by Luke Melas and loosely based on the network used by Zhang et al. \cite{zhang2016colorful} with the major difference being that their model used in 'Colorful Image Colorization' approached colorization as a classification problem.
 
 Our network topology consists of the first six layers of a ResNet-18, followed by three layers of deconvolutions. We find that this simple structure works well enough for our purposes and is relatively fast. Our model uses the Adam optimiser alongside PyTorch's autograd which makes backpropogating in our network trivial.
 
@@ -136,9 +147,11 @@ What we found
 
 Extensions to other tasks.
 
+\medskip
+ 
+\bibliographystyle{ieeetr}
+\bibliography{bibfile}
 
-\bibliographystyle{IEEEtran}
-\bibliography{IEEEfull,colourisation}
 
 % \begin{thebibliography}{00}
 % \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
