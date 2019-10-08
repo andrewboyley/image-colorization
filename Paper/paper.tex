@@ -66,14 +66,30 @@ We look at how much data we need to augment X from Y to fix the problem. We find
 
 \section{Background}
 
-Explain notation and setup for regression/classification task in general i.e. objective function
+%Explain notation and setup for regression/classification task in general i.e. objective function
 
-Describe LAB; classes, etc. 
+%Describe LAB; classes, etc. 
 
-Describe eval criteria
+%Describe eval criteria
 
-Describe neural network, backprop, Insert image if space
+%Describe neural network, backprop, Insert image if space
+\subsection{Colour space}
 
+To make our lives easier, instead of using the typical RGB color space, we use the CIELAB color space. This makes it convenient when seperating the gray and color channels due to the fact that the 'L' channel in LAB is simply the grayscale image. We can then pass this grayscale input (1xWxH) through our model and compare the output (2xWxH) to the original 'AB' channels of the image. These 'AB' channels make up the color and simply show the red-green and blue-yellow shift respectively. HSB would be another option when choosing a suitable colour space. In general, the choice of colour space makes no difference to the resulting image that our network produces.
+
+When reading images from our dataset, we first interpret them in the RBG colour space and then proceed to convert them to LAB using tools such as SciKit Learn or OpenCV, both of which contain colour space conversion libraries. 
+
+\subsection{Regression vs Classification}
+
+When colorizing images using a deep learning approach, it is generally easiest to develop our model as a regression problem. Classification would yield better results which are more life-like and saturated whereas regression would lead to output images appearing dull and bland. This is the result of the multi-modality of pictures. There is no clear color for any one image. This leads our model, using an aggregate loss function, to simply find an average color, resulting in a bland image.
+
+For the sake of simplicity, we continue to use regression as it leads to satisfactory results whilst being simple to understand. We utilize a mean squared error loss which may average color distribution but still produces images with a reasonable amount of color. If we aimed to produce images which were more diverse in colour and saturated, regression would not suffice. Our model should, however, be able to compare output across datasets in order to draw correlation between the accuracy of the ouput and the representivity of local images in the data, which it does.
+
+\subsection{Model topology}
+
+Our choice of model has been based on the simple regression model developed by Luke Melas and loosely based on the network used by Zhang et al. with the major difference being that their model used in 'Colorful Image Colorization' approached colorization as a classification problem.
+
+Our network topology consists of the first six layers of a ResNet-18, followed by three layers of deconvolutions. We find that this simple structure works well enough for our purposes and is relatively fast. Our model uses the Adam optimiser alongside PyTorch's autograd which makes backpropogating in our network trivial.
 
 \section{Proposed Method}
 
