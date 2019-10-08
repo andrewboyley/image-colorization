@@ -47,22 +47,15 @@ deep learning, bias, dataset imbalance, regression, self-supervised learning
 
 \section{Introduction}
 
-Well known that bias in ML is a problem. 
+Machine Learning is a tentative endeavour, whereby subtle changes in the learning environment often lead to profound alterations to both the overall effectiveness of the machine learning model and the accuracy of the desired output. 
 
-Due to lack of diversity in training examples
+Such a phenomenon exists when training a model to recognise and colourise aspects of grayscale images: by employing a training dataset with a bias to a particular locale – like an American or a Eurocentric setting, for instance – any sample taken from outside such an area (with particular focus placed on a South African sample) is misrepresented and yields erroneous results, with the produced colourised image being quintessentially different to the intended image.
 
-Some work on how to mitigate these issues in training, but what about the data itself?
+The identified cause is the lack of diversity in the training datasets because even though various methods can be implemented in the actual model to mitigate this bias, they cannot account for a wholly prejudiced dataset being used initially, particularly a non-South African dataset being used to train a model to operate on a South African sample. 
 
-We investigate how much data we need to make the problem go away. 
+Therefore, the aim is to investigate what percentage of the training dataset has to be of local origin compared to the international origin of the remainder of the dataset. However, constructing and testing datasets to determine such a goal is both time consuming and expensive in terms of financial and computational resources required. Hence, the approach of image colourisation has been selected as it allows an uncomplicated procedure of collecting publicly-available images of both International and South African settings, thus providing a simple way to build a diverse dataset which does not need to be labelled or require excessive computational time since the machine learning approach required is one of supervised learning where the expected outcome is derived from the images themselves.
 
-Expensive to construct datasets. Need time, money, info.
-We therefore select the task of image colourisation, since it is a supervised approach. We need no labelling, only data, since the regression targets are derived from the images themselves!
-We get this data from publically accessible sources captured from variety of places across SA/Africa. 
-Easy to build a diverse dataset in this way. 
-
-We train image colourisation on dataset X, and test on our dataset Y.  I assume bad things happpen.
-
-We look at how much data we need to augment X from Y to fix the problem. We find (insert results) 
+Consequently, the refined aim is to investigate the optimal ratio of non-South African images to South African images in the training dataset is such that bias is minimised and the model performs optimally for both sets of images.
 
 \section{Background}
 
