@@ -114,7 +114,7 @@ Our network topology consists of the first six layers of a ResNet-18, followed b
 
 \subsection{Brief Outline}
 
-In order to determine the percentage of local data in the training dataset required to mitigate the effect of bias in machine learning models, multiple versions of the dataset are required, with each one consisting of a total of 40000 images and being constructed with a different percentage of South African images from 0\% to 40\% inclusive, increasing in graduations of 10\%. In addition to this training dataset, a validation dataset (of 1000 images in total) is also prepared with the same corresponding percentage inclusion of South African images.
+In order to determine the percentage of local data in the training dataset required to mitigate the effect of bias in machine learning models, multiple versions of the dataset are required, with each one consisting of a total of 40000 images and being constructed with a different percentage of South African images from 0\% to 30\% inclusive, increasing in graduations of 10\%. In addition to this training dataset, a validation dataset (of 1000 images in total) is also prepared with the same corresponding percentage inclusion of South African images.
 
 Each version of the dataset will be used to train the model independently of each other for a total of 75 epochs each, with validation being done at the conclusion of each epoch. 
 
@@ -134,7 +134,7 @@ The collection of South African images\footnote{All images are freely available 
 	\item etc.
 \end{itemize}
 
-A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 40\% South African image inclusion) by randomly sampling $x$\% of images from the South African training split and $x$\% of images from the South African validation/testing split. The same number of images ($x$\%) was removed from the foreign dataset meaning that for each dataset, it contains $x$\% local data and ($100 - x$)\% foreign data where $x\in\{0, 10, 20, 30, 40\}$
+A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 30\% South African image inclusion) by randomly sampling $x$\% of images from the South African training split and $x$\% of images from the South African validation/testing split. The same number of images ($x$\%) was removed from the foreign dataset meaning that for each dataset, it contains $x$\% local data and ($100 - x$)\% foreign data where $x\in\{0, 10, 20, 30, 40\}$
 
 \textbf{Include sample images here}
 
@@ -170,7 +170,7 @@ Learning Rate & Epochs & Workers & Batch Size \\
 \end{tabular} 
 \end{table}
 
-Due to the fact that images collected from Flickr were substantially larger in size than those of the European set, it took longer to train models with a high inclusion rate to the above mentioned epoch. For this reason, we chose to limit our inclusion of South African data to 40\%. Future experiments could show that an inclusion rate higher than 40\% is optimal but for the purpose of this experiment, it will suffice.
+Due to the fact that images collected from Flickr were substantially larger in size than those of the European set, it took longer to train models with a high inclusion rate to the above mentioned epoch. For this reason, we chose to limit our inclusion of South African data to 30\%. Future experiments could show that an inclusion rate higher than 30\% is optimal but for the purpose of this experiment, it will suffice.
 
 For the sake of simplicity, validation and test sets have been merged into one. For each dataset, there are 40000 images in the training set and 1000 in the test/validation split. This makes it an average sized data set which means that the inclusion rates on these datasets shoud reflect to other datasets of similar size with only minor deviation.
 
@@ -197,9 +197,9 @@ After evalutating each model on the same purely South African dataset, these are
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline 
-Local inclusion \% & 10\% & 20\% & 30\% & 40\% \\ 
+Local inclusion \% & 0\% & 10\% & 20\% & 30\%  \\ 
 \hline 
-Loss $\times 10^{-3}$& 2.638&2.638&2.638&2.638\\ 
+Loss $\times 10^{-3}$& 2.727 & 2.696 & 2.660 & 2.638\\ 
 \hline 
 \end{tabular} 
 \end{table}
