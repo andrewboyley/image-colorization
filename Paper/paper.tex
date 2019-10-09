@@ -114,7 +114,7 @@ Our network topology consists of the first six layers of a ResNet-18, followed b
 
 \subsection{Brief Outline}
 
-In order to determine the percentage of local data in the training dataset required to mitigate the effect of bias in machine learning models, multiple versions of the dataset are required, with each one consisting of a total of 40000 images and being constructed with a different percentage of South African images from 0\% to 50\% inclusive, increasing in graduations of 10\%. In addition to this training dataset, a validation dataset (of 1000 images in total) is also prepared with the same corresponding percentage inclusion of South African images.
+In order to determine the percentage of local data in the training dataset required to mitigate the effect of bias in machine learning models, multiple versions of the dataset are required, with each one consisting of a total of 40000 images and being constructed with a different percentage of South African images from 0\% to 40\% inclusive, increasing in graduations of 10\%. In addition to this training dataset, a validation dataset (of 1000 images in total) is also prepared with the same corresponding percentage inclusion of South African images.
 
 Each version of the dataset will be used to train the model independently of each other for a total of 75 epochs each, with validation being done at the conclusion of each epoch. 
 
@@ -134,27 +134,68 @@ The collection of South African images\footnote{All images are freely available 
 	\item \textbf{etc. etc.}
 \end{itemize}
 
-A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 50\% South African image inclusion) by selecting the first \emph{n} and \emph{m} images from the image collections, respectively.
+A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 40\% South African image inclusion) by selecting the first \emph{n} and \emph{m} images from the image collections, respectively.
 
 \textbf{Include sample images here}
 
 \section{Experiments}
 
-Explain experiment. Model used. Hyperparameters. Early stopping?? Train/val/test splits.
+%Explain experiment. Model used. Hyperparameters. Early stopping?? Train/val/test splits.
+%
+%Show training curves over time for model trained on X. 
+%
+%Show images from X coloured.
+%Show images from Y coloured - qualitative analysis
+%
+%Start adding data from Y to X. 
+%
+%Produce THE curve as a function of data ratio
+%
+%Show images from X coloured.
+%Show images from Y coloured - qualitative analysis
 
-Show training curves over time for model trained on X. 
+\subsection{Training}
 
-Show images from X coloured.
-Show images from Y coloured - qualitative analysis
-
-Start adding data from Y to X. 
-
-Produce THE curve as a function of data ratio
-
-Show images from X coloured.
-Show images from Y coloured - qualitative analysis
+For each dataset, we trained our convolutional model from the beginning with the exact same hyperparameters. The following table illustrates the hyperparameters used:
 
 
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Learning Rate & Epochs & Workers & Batch Size \\ 
+\hline 
+0.001 & 75 & 4 & 64 \\ 
+\hline 
+\end{tabular} 
+\end{table}
+
+Due to the fact that images collected from Flickr were substantially larger in size than those of the European set, it took longer to train models with a high inclusion rate to the above mentioned epoch. For this reason, we chose to limit our inclusion of South African data to 40\%. Future experiments could show that an inclusion rate higher than 40\% is optimal but for the purpose of this experiment, it will suffice.
+
+For the sake of simplicity, validation and test sets have been merged into one. For each dataset, there are 40000 images in the training set and 1000 in the test/validation split. This makes it an average sized data set which means that inclusions rates on it shoud reflect to others with only minor deviation.
+
+We found that the loss dropped immediately to a reasonable value within the first five epochs but the images produces were not of a high quality. The training process was long and slow with very little change in loss from one epoch to the next but the end results make it worthwhile.
+
+%Insert picures from different epochs
+
+\subsection{Evaluating}
+
+After all models have been trained on their respective datasets, we evaluate them on purely the South African dataset. This gives us a good understanding of how much local data to include into foreign datasets if we want reasonable results. The pure South African dataset contains 35000 images in its training split and 5000 images in the validation/testing split. These were both used to construct the hybrid datasets. Now, we evaluate the model that has been previously trained on the foreign-local hybrid set on a purely South African dataset and measure its performance.
+
+We expect the loss to be much larger when very few South African images have been included into the hybrid set. As we evaluate datasets with a larger inclusion of local data, we expect the models loss to decrease. Using this data, we can estimate the optimal inclusion of local data for satisfactory results when performing machine learning in foreign countries.
+
+After evalutating each model on the same dataset, these are their respective losses,
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+Local inclusion \% & 10\% & 20\% & 30\% & 40\% \\ 
+\hline 
+Loss & 0.0027 & 0.0027 & 0.0027 & 0.0027 \\ 
+\hline 
+\end{tabular} 
+\end{table}
 
 \section{Related Work}
 
