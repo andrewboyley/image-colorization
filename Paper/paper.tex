@@ -122,19 +122,19 @@ A set collection of South African and International images will be passed throug
 
 \subsection{Building Datasets}
 
-\textbf{Where get european images from?????}
-
-\textbf{and must we show that the datasets are fundamentally different - maybe something that can be said about the source??}
+Our original dataset is a subset of the Places365 dataset. This dataset consists of images that are mainly of European or Western origin. This means that if we train a model on such a dataset and then prodceed to evaluate it on South African or local images, we expect an increase in our loss. This drop in performance can be attributed to the difference in colour of local images. For example, South African landscapes have a distinct hue that is not present in European countries. South African people also have a different appearance to western people who will likely be present in European datasets.
 
 The collection of South African images\footnote{All images are freely available with a Creative Commons Licence or are in the public domain} was downloaded from the image-sharing service, Flickr. Only images which have been tagged with one of the following keywords were selected:
 
 \begin{itemize}
 	\item South Africa
 	\item Soweto
-	\item \textbf{etc. etc.}
+	\item Johannesburg
+	\item Kruger Park
+	\item etc.
 \end{itemize}
 
-A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 40\% South African image inclusion) by selecting the first \emph{n} and \emph{m} images from the image collections, respectively.
+A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 40\% South African image inclusion) by randomly sampling $x$\% of images from the South African training split and $x$\% of images from the South African validation/testing split. The same number of images ($x$\%) was removed from the foreign dataset meaning that for each dataset, it contains $x$\% local data and ($100 - x$)\% foreign data where $x\in\{0, 10, 20, 30, 40\}$
 
 \textbf{Include sample images here}
 
@@ -172,9 +172,16 @@ Learning Rate & Epochs & Workers & Batch Size \\
 
 Due to the fact that images collected from Flickr were substantially larger in size than those of the European set, it took longer to train models with a high inclusion rate to the above mentioned epoch. For this reason, we chose to limit our inclusion of South African data to 40\%. Future experiments could show that an inclusion rate higher than 40\% is optimal but for the purpose of this experiment, it will suffice.
 
-For the sake of simplicity, validation and test sets have been merged into one. For each dataset, there are 40000 images in the training set and 1000 in the test/validation split. This makes it an average sized data set which means that inclusions rates on it shoud reflect to others with only minor deviation.
+For the sake of simplicity, validation and test sets have been merged into one. For each dataset, there are 40000 images in the training set and 1000 in the test/validation split. This makes it an average sized data set which means that the inclusion rates on these datasets shoud reflect to other datasets of similar size with only minor deviation.
 
-We found that the loss dropped immediately to a reasonable value within the first five epochs but the images produces were not of a high quality. The training process was long and slow with very little change in loss from one epoch to the next but the end results make it worthwhile.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=9cm]{Curves/loss_train}
+\caption{Loss curves of each dataset during training}
+\label{fig:loss_train}
+\end{figure}
+
+We found that the loss dropped immediately to a reasonable value within the first five epochs but the images produces were not of a high quality. The training process was long and slow with very little change in loss from one epoch to the next but the end results make it worthwhile. Better results could have been achieved by training more models, each with a different inclusion of local data. This would allow us to draw a definative correlation of local data to loss but in this case, the samples we have taken will give us a very rough idea of the optimal parameters.
 
 %Insert picures from different epochs
 
@@ -184,7 +191,7 @@ After all models have been trained on their respective datasets, we evaluate the
 
 We expect the loss to be much larger when very few South African images have been included into the hybrid set. As we evaluate datasets with a larger inclusion of local data, we expect the models loss to decrease. Using this data, we can estimate the optimal inclusion of local data for satisfactory results when performing machine learning in foreign countries.
 
-After evalutating each model on the same dataset, these are their respective losses,
+After evalutating each model on the same purely South African dataset, these are their respective losses,
 
 \begin{table}[h]
 \centering
@@ -192,7 +199,7 @@ After evalutating each model on the same dataset, these are their respective los
 \hline 
 Local inclusion \% & 10\% & 20\% & 30\% & 40\% \\ 
 \hline 
-Loss & 0.0027 & 0.0027 & 0.0027 & 0.0027 \\ 
+Loss $\times 10^{-3}$& 2.638&2.638&2.638&2.638\\ 
 \hline 
 \end{tabular} 
 \end{table}
