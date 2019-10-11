@@ -142,8 +142,9 @@ A Python script was used to assimilate the International and South African image
 \includegraphics[width=3.7cm]{SampleSA/46} & \includegraphics[width=3.7cm]{SampleSA/61}\\
 \includegraphics[width=3.7cm]{SampleSA/67} & \includegraphics[width=3.7cm]{SampleSA/69}\\
 \includegraphics[width=3.7cm]{SampleSA/106} & \includegraphics[width=3.7cm]{SampleSA/127}\\
-\caption{Sample images from the South African dataset}
+
 \end{tabular}
+\caption{Sample images from the South African dataset}
 \label{fig:samplesa}
 \end{table}
 
@@ -239,13 +240,25 @@ The difference above is extremely minute. You may not even be able to see the di
 
 \section{Conclusion}
 
-Important problem
+%Important problem
+%
+%Investigated data representivity
+%
+%What we found
+%
+%Extensions to other tasks.
 
-Investigated data representivity
+The investigation of dataset bias on the training of machine learning models is highly relevant as an affirmative conclusion could lead to the development of methods for improving the overall efficiency of the model (as opposed to optimising the actual algorithm used for training) as well as a more thorough representation of the data and the various real-world conditions that exist, thus enhancing the diversity of the application of the model.
 
-What we found
+Evidently, the errors in the images coloured for the various percentage inclusions of local data are relatively the same - only a 3.3\% improvement was recorded for the training of the model from the 0\% inclusion to the 30\% inclusion. Such an improvement is mitigated when considering that the error on the colourisation of the images is already of an order of magnitude of $-3$, and is likely only to be noticed by computers and those utilising computational resources to analyse the images.
 
-Extensions to other tasks.
+This slight improvement is evident in the modest variations in the hue of the colours, as in Figure \ref{fig:inclusion_compare}, with the images produced from subsequently-increasing percentages of local data inclusion containing hues and saturations more applicable to that locale.
+
+Consequently, the effect of the inclusion of local data is not as profound as one might have hypothesised and the images produced from a model trained with this local data included are largely indistinguishable from the images produced from a corresponding international dataset, especially to the human eye and so does not justify the additional resources required to build the inclusive dataset.
+
+Although we investigated the effect of dataset bias on image colourisation, there are a multitude of other applications of machine learning where this bias may come into effect. Due to the inherent differences between the nature of image colourisation and other applications (for example, in examining and predicting economic trends in a particular city), where humans may be abstracted from the analysis of the data and it is does solely by computers with a report merely being generated - in such a case, minute changes are of the utmost importance and lead to significant changes in the market trends recognised.
+
+Therefore, the result of whether or not dataset bias exists is conclusive: it does and the inclusion of more diverse data in the set improves the performance of the model; the result of whether or not the building of a more diverse dataset is inconclusive: this would be decided on a per-application basis and what relative accuracy is required.
 
 \medskip
  
