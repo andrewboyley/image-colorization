@@ -72,7 +72,7 @@ When reading images from our dataset, our chosen system interprets them in the R
 
 \subsection{Regression vs Classification}
 
-When colorizing images using a deep learning approach, it is generally easiest to develop the model as a regression problem. Classification would yield better results which are more life-like and saturated whereas regression would lead to output images appearing dull and bland. This is the result of the multi-modality of pictures. There is no clear colour for any one image. This leads our model, using an aggregate loss function, to simply find an average colour, resulting in a bland image.
+When colourising images using a deep learning approach, it is generally easiest to develop the model as a regression problem. Classification would yield better results which are more life-like and saturated whereas regression would lead to output images appearing dull and bland. This is the result of the multi-modality of pictures. There is no clear colour for any one image. This leads our model, using an aggregate loss function, to simply find an average colour, resulting in a bland image.
 
 \begin{figure}[h]
     \centering
@@ -116,7 +116,7 @@ The collection of South African images\footnote{All images are freely available 
 	\item etc.
 \end{itemize}
 
-A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 30\% South African image inclusion) by randomly sampling $x$\% of images from the South African training split and $x$\% of images from the South African validation/testing split. The same number of images ($x$\%) was removed from the foreign dataset meaning that for each dataset, it contains $x$\% local data and ($100 - x$)\% foreign data where $x\in\{0, 10, 20, 30, 40\}$
+A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 30\% South African image inclusion) by randomly sampling $x$\% of images from the South African training split and $x$\% of images from the South African validation/testing split. The same number of images ($x$\%) was removed from the foreign dataset meaning that for each dataset, it contains $x$\% local data and ($100 - x$)\% foreign data where $x\in\{0, 10, 20, 30\}$
 
 \begin{table}[h!]
 \centering
@@ -217,6 +217,8 @@ The difference above is extremely minute. You may not even be able to see the di
 Many studies have shown that the majority of datasets used in facial analysis are comprised of mostly lighter skinned subjects. Research published by Joy Buolamwini \cite{buolamwini2018gender} shows that when evaluated on industry standard facial analysis networks, dark skinned females yield the highest error rates (of up to 34.7\%). This is alarming considering that light skinned males yield a maximum error rate of only 0.8\% when evaluated on the same dataset. \cite{corbett2018measure}
 
 This stems from the fact that data scientists and researchers continue to neglect the unbalanced distribution of race in the datasets that they use. The systems used and sold by IBM, Microsoft and Amazon are just a few that contain these race imbalances. The systems sold by these technology giants are used by some states in the United States to apprehend criminals by means of facial recognition. The fact that there are racial imbalances in many of the networks used in these systems means that there is a higher chance for people of colour to be falsely accused of criminal activity due to facial recognition software returning a false positive. 
+
+Due to the nature of our experiment, the amount of local inclusion did not dramatically effect the outcome, but that would not be the case when dealing with facial recognition as previously discussed. In that case, it would be vital to have an inclusive dataset that is well distributed across all races and genders.
 
 The class imbalance problem has long been researched and there are various methods \cite{japkowicz2000class} to overcome the issue. One such method to overcome a dataset imbalance is to simply re-sample the minority until a suitable distribution is achieved. Similarly, down-sampling the majority leads to a fairer distribution as shown in \cite{japkowicz2000class}. 
 
