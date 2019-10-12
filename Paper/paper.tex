@@ -2,6 +2,7 @@
 % \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
+\usepackage{float}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
@@ -63,13 +64,6 @@ Consequently, the refined aim is to investigate the optimal ratio of non-South A
 
 \section{Background}
 
-%Explain notation and setup for regression/classification task in general i.e. objective function
-
-%Describe LAB; classes, etc. 
-
-%Describe eval criteria
-
-%Describe neural network, backprop, Insert image if space
 \subsection{Colour space}
 
 To make our lives easier, instead of using the typical RGB color space, we use the CIELAB color space. This makes it convenient when seperating the gray and color channels due to the fact that the 'L' channel in LAB is simply the grayscale image. We can then pass this grayscale input (1 x W x H) through our model and compare the output (2 x W x H) to the original 'AB' channels of the image. These 'AB' channels make up the color and simply show the red-green and blue-yellow shift respectively. HSB would be another option when choosing a suitable colour space. In general, the choice of colour space makes no difference to the resulting image that our network produces.
@@ -99,20 +93,6 @@ Our network topology consists of the first six layers of a ResNet-18, followed b
 
 \section{Proposed Method}
 
-%Train colouriser on dataset X. Evaluate accuracy
-%
-%Explain how our dataset is built precisely: using flickr data, keywords, any preprocessing etc. 
-%
-%Show some images. 
-%
-%Maybe even compute mean statistics of dataset X and Y to show that they are in fact different?
-%
-%Explain method - compute accuracy on X -> X.
-%Then check X -> Y
-%
-%Then check how much of Y must be added to X to improve things?
-%
-%Would be nice to have multiple datasets, models, but maybe no time :(
 
 \subsection{Brief Outline}
 
@@ -138,7 +118,7 @@ The collection of South African images\footnote{All images are freely available 
 
 A Python script was used to assimilate the International and South African images into the required ratios (of 0\% to 30\% South African image inclusion) by randomly sampling $x$\% of images from the South African training split and $x$\% of images from the South African validation/testing split. The same number of images ($x$\%) was removed from the foreign dataset meaning that for each dataset, it contains $x$\% local data and ($100 - x$)\% foreign data where $x\in\{0, 10, 20, 30, 40\}$
 
-\begin{table}[h!]
+\begin{table}[h]
 \centering
 \begin{tabular}{cc}
 \includegraphics[width=3.7cm]{SampleSA/46} & \includegraphics[width=3.7cm]{SampleSA/61}\\
