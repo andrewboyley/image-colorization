@@ -41,10 +41,12 @@ steven.james@wits.ac.za}
 
 \begin{abstract}
 
+Sufficient research exists for the implementation of bias-mitigating machine learning algorithms, however, the presence of bias in the original dataset has not been comprehensively considered, which could lead to vast improvements in the efficiency and diversity of machine learning in general. To determine what percentage of local data has to be included in order to alleviate this bias, we examine the sub-problem of how much South African data is required to correctly colourise grayscale images of a South African context. There was only a 3.3\% reduction in the error of the colourised images using separate regression-based models trained to 75 epochs with 0\% to 30\% inclusion of local data, with minimal reduction in loss occurring after 5 epochs. This did lead to the hues of the images being slightly more South African in essence, but which was largely unnoticed by the human eye. Consequently, the inclusion of local data in the dataset definitely minimises the bias of the dataset, but whether or not that bias-mitigation justifies the vast resources required to build the comprehensive dataset is determined on a case-by-case basis.
+
 \end{abstract}
 
 \begin{IEEEkeywords}
-deep learning, bias, dataset imbalance, regression, self-supervised learning
+deep learning, bias, dataset imbalance, regression, self-supervised learning, image colourisation
 \end{IEEEkeywords}
 
 \section{Introduction}
